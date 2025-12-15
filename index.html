@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Warung Alok</title>
 
 <style>
@@ -12,6 +12,8 @@ body {
   color: #e5e7eb;
   margin: 0;
 }
+
+/* HEADER */
 header {
   background: #020617;
   padding: 20px;
@@ -24,16 +26,14 @@ header h1 {
 header p {
   font-size: 13px;
 }
+
+/* ORDER BOX */
 .order-box {
   background: #020617;
-  margin: 15px auto;
+  margin: 15px;
   padding: 15px;
-  max-width: 900px;
   text-align: center;
   border-radius: 12px;
-}
-.order-box p {
-  margin: 8px 0;
 }
 .order-btn {
   display: inline-block;
@@ -43,77 +43,72 @@ header p {
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 16px;
-}
-.order-btn:hover {
-  background: #16a34a;
+  margin: 5px;
 }
 
-.category {
+/* KATEGORI */
 .category {
   display: flex;
   gap: 12px;
   padding: 12px;
-  margin: 10px 0;
   overflow-x: auto;
   white-space: nowrap;
-
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 .category::-webkit-scrollbar {
   display: none;
 }
-
 .category button {
-  flex: 0 0 auto;
-  min-width: 120px;
   padding: 14px 20px;
   border-radius: 14px;
-  font-size: 16px;
-  font-weight: 600;
+  border: 1px solid #334155;
   background: #020617;
   color: #e5e7eb;
-  border: 1px solid #334155;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
 }
-
 .category button:hover {
   background: #38bdf8;
   color: #000;
 }
 
-/* tombol aktif */
-.category button.active {
-  background: #22c55e;
-  color: #000;
-  border-color: #22c55e;
-}
+/* GRID ITEM */
 .container {
   max-width: 900px;
   margin: auto;
-  padding: 20px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ITEM */
 .item {
   background: #020617;
   border-radius: 12px;
   padding: 15px;
-  margin-bottom: 20px;
 }
 .item img {
   width: 100%;
-  object-fit: contain;
   border-radius: 10px;
 }
 .item h2 {
   color: #facc15;
-  margin: 10px 0;
+  font-size: 16px;
+  margin: 10px 0 5px;
 }
 .price {
   font-size: 18px;
+  font-weight: bold;
 }
 
+/* FOOTER */
 footer {
   background: #020617;
   text-align: center;
@@ -125,14 +120,14 @@ footer {
 
 <script>
 function filterCategory(cat) {
-  const items = document.getElementsByClassName("item");
-  for (let i = 0; i < items.length; i++) {
-    if (cat === "all" || items[i].classList.contains(cat)) {
-      items[i].style.display = "block";
+  const items = document.querySelectorAll(".item");
+  items.forEach(item => {
+    if (cat === "all" || item.classList.contains(cat)) {
+      item.style.display = "block";
     } else {
-      items[i].style.display = "none";
+      item.style.display = "none";
     }
-  }
+  });
 }
 </script>
 </head>
@@ -141,27 +136,18 @@ function filterCategory(cat) {
 
 <header>
   <h1>Warung Alok</h1>
-  <hr>
-  <p>Menjual kebutuhan Grow a Garden.</p>
-<p>Proses cepat & aman 100%</p>
-<p>Kalau butuh pet lain yang tidak ada di list, bisa langsung tanya ke admin</p>
-<p>Kalau mau beli, bisa chat admin.</p>
-<p>Beli banyak bisa dapat potongan harga</p>
+  <p>Menjual kebutuhan Grow a Garden</p>
+  <p>Proses cepat & aman</p>
 </header>
-<hr>
-<!-- ORDER WHATSAPP -->
+
 <div class="order-box">
-  <p>Hubungi Admin</p>
   <a class="order-btn"
      href="https://wa.me/6283170647819?text=Halo%20Min%20Mau%20Beli"
-     target="_blank">
-     WhatsApp
-  </a>
+     target="_blank">WhatsApp</a>
+
   <a class="order-btn"
-     href="https://Instagram.com/warung_alok"
-     target="_blank">
-     Instagram 
-  </a>
+     href="https://instagram.com/warung_alok"
+     target="_blank">Instagram</a>
 </div>
 
 <!-- KATEGORI -->
@@ -172,51 +158,35 @@ function filterCategory(cat) {
   <button onclick="filterCategory('robux')">Token</button>
 </div>
 
+<!-- ITEM -->
 <div class="container">
 
   <div class="item pet">
     <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus </h2>
+    <h2>Brontosaurus</h2>
     <p class="price">Rp5.000</p>
   </div>
-<div class="item pet">
-    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus </h2>
-    <p class="price">Rp5.000</p>
-  </div>
+
   <div class="item pet">
     <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus </h2>
+    <h2>Brontosaurus</h2>
     <p class="price">Rp5.000</p>
   </div>
-  <div class="item pet">
-    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus </h2>
-    <p class="price">Rp5.000</p>
-  </div>
-  <div class="item pet">
-    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus </h2>
-    <p class="price">Rp5.000</p>
-  </div>
+
   <div class="item akun">
-    <img src="https://i.imgur.com/IMAGE2.jpg">
-    <h2>🎮 Akun Roblox Sultan</h2>
+    <h2>🎮 Jasa Joki Roblox</h2>
     <p class="price">Rp350.000</p>
-    <p>Ganti data setelah transaksi</p>
   </div>
 
   <div class="item robux">
-    <img src="https://i.imgur.com/IMAGE3.jpg">
-    <h2>💰 Robux Gift 400</h2>
+    <h2>💰 Robux Gift</h2>
     <p class="price">Rp65.000</p>
-    <p>Proses cepat & aman</p>
   </div>
 
 </div>
 
 <footer>
-  <p>© Warung Alok </p>
+  © Warung Alok
 </footer>
 
 </body>
