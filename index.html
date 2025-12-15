@@ -52,27 +52,28 @@ header p {
 .category {
   display: flex;
   overflow-x: auto;
-  gap: 10px;
-  padding: 12px 10px;
-  margin: 10px auto;
-  max-width: 100%;
-  scrollbar-width: none; /* Firefox */
+  white-space: nowrap;
+  gap: 12px;
+  padding: 12px;
+  margin: 10px 0;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 .category::-webkit-scrollbar {
-  display: none; /* Chrome */
+  display: none;
 }
 .category button {
   flex: 0 0 auto;
+  min-width: 120px; /* INI KUNCI UTAMA */
   background: #020617;
   color: #e5e7eb;
   border: 1px solid #334155;
-  padding: 14px 22px;
+  padding: 14px 20px;
   border-radius: 14px;
-  cursor: pointer;
   font-size: 16px;
-  white-space: nowrap;
+  cursor: pointer;
 }
-
 .category button:hover {
   background: #38bdf8;
   color: #000;
