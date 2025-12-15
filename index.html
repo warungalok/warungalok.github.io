@@ -27,7 +27,7 @@ header p {
   font-size: 13px;
 }
 
-/* ORDER BOX */
+/* ORDER */
 .order-box {
   background: #020617;
   margin: 15px;
@@ -46,17 +46,14 @@ header p {
   margin: 5px;
 }
 
-/* KATEGORI */
+/* KATEGORI UTAMA */
 .category {
   display: flex;
   gap: 12px;
   padding: 12px;
   overflow-x: auto;
-  white-space: nowrap;
 }
-.category::-webkit-scrollbar {
-  display: none;
-}
+.category::-webkit-scrollbar { display: none; }
 .category button {
   padding: 14px 20px;
   border-radius: 14px;
@@ -64,11 +61,31 @@ header p {
   background: #020617;
   color: #e5e7eb;
   font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
 }
-.category button:hover {
-  background: #38bdf8;
+.category button.active {
+  background: #22c55e;
+  color: #000;
+}
+
+/* SUB KATEGORI */
+.subcategory {
+  display: none;
+  gap: 10px;
+  padding: 10px 12px;
+  overflow-x: auto;
+}
+.subcategory button {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 14px;
+  cursor: pointer;
+}
+.subcategory button.active {
+  background: #facc15;
   color: #000;
 }
 
@@ -81,14 +98,12 @@ header p {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
-
 @media (min-width: 768px) {
   .container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* ITEM */
 .item {
   background: #020617;
   border-radius: 12px;
@@ -101,7 +116,6 @@ header p {
 .item h2 {
   color: #facc15;
   font-size: 16px;
-  margin: 10px 0 5px;
 }
 .price {
   font-size: 18px;
@@ -119,14 +133,48 @@ footer {
 </style>
 
 <script>
-function filterCategory(cat) {
-  const items = document.querySelectorAll(".item");
-  items.forEach(item => {
-    if (cat === "all" || item.classList.contains(cat)) {
-      item.style.display = "block";
-    } else {
-      item.style.display = "none";
-    }
+let mainCat = "all";
+let subCat = "all";
+
+function filterMain(cat, btn) {
+  mainCat = cat;
+  subCat = "all";
+
+  document.querySelectorAll(".category button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  document.querySelectorAll(".subcategory")
+    .forEach(s => s.style.display = "none");
+
+  if (cat !== "all") {
+    const sub = document.getElementById("sub-" + cat);
+    if (sub) sub.style.display = "flex";
+  }
+
+  applyFilter();
+}
+
+function filterSub(cat, btn) {
+  subCat = cat;
+  btn.parentElement.querySelectorAll("button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  applyFilter();
+}
+
+function applyFilter() {
+  document.querySelectorAll(".item").forEach(item => {
+    let show = true;
+
+    if (mainCat !== "all" && !item.classList.contains(mainCat))
+      show = false;
+
+    if (subCat !== "all" && !item.classList.contains(subCat))
+      show = false;
+
+    item.style.display = show ? "block" : "none";
   });
 }
 </script>
@@ -137,52 +185,43 @@ function filterCategory(cat) {
 <header>
   <h1>Warung Alok</h1>
   <p>Menjual kebutuhan Grow a Garden</p>
-  <p>Proses cepat & aman</p>
 </header>
 
 <div class="order-box">
-  <a class="order-btn"
-     href="https://wa.me/6283170647819?text=Halo%20Min%20Mau%20Beli"
-     target="_blank">WhatsApp</a>
-
-  <a class="order-btn"
-     href="https://instagram.com/warung_alok"
-     target="_blank">Instagram</a>
+  <a class="order-btn" href="https://wa.me/6283170647819" target="_blank">WhatsApp</a>
+  <a class="order-btn" href="https://instagram.com/warung_alok" target="_blank">Instagram</a>
 </div>
 
 <!-- KATEGORI -->
 <div class="category">
-  <button onclick="filterCategory('all')">Semua</button>
-  <button onclick="filterCategory('pet')">Pet</button>
-  <button onclick="filterCategory('akun')">Jasa Joki</button>
-  <button onclick="filterCategory('robux')">Token</button>
+  <button class="active" onclick="filterMain('all', this)">Semua</button>
+  <button onclick="filterMain('pet', this)">Pet</button>
+  <button onclick="filterMain('akun', this)">Jasa</button>
+</div>
+
+<!-- SUB KATEGORI -->
+<div class="subcategory" id="sub-pet">
+  <button class="active" onclick="filterSub('all', this)">Semua Pet</button>
+  <button onclick="filterSub('dino', this)">Dino</button>
+</div>
+
+<div class="subcategory" id="sub-akun">
+  <button class="active" onclick="filterSub('all', this)">Semua Jasa</button>
+  <button onclick="filterSub('joki', this)">Joki</button>
 </div>
 
 <!-- ITEM -->
 <div class="container">
-
-  <div class="item pet">
+  <div class="item pet dino">
     <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
     <h2>Brontosaurus</h2>
     <p class="price">Rp5.000</p>
   </div>
 
-  <div class="item pet">
-    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus</h2>
-    <p class="price">Rp5.000</p>
-  </div>
-
-  <div class="item akun">
+  <div class="item akun joki">
     <h2>🎮 Jasa Joki Roblox</h2>
     <p class="price">Rp350.000</p>
   </div>
-
-  <div class="item robux">
-    <h2>💰 Robux Gift</h2>
-    <p class="price">Rp65.000</p>
-  </div>
-
 </div>
 
 <footer>
