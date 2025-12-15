@@ -50,12 +50,13 @@ header p {
 }
 
 .category {
+.category {
   display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
   gap: 12px;
   padding: 12px;
   margin: 10px 0;
+  overflow-x: auto;
+  white-space: nowrap;
 
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -63,20 +64,31 @@ header p {
 .category::-webkit-scrollbar {
   display: none;
 }
+
 .category button {
   flex: 0 0 auto;
-  min-width: 120px; /* INI KUNCI UTAMA */
-  background: #020617;
-  color: #e5e7eb;
-  border: 1px solid #334155;
+  min-width: 120px;
   padding: 14px 20px;
   border-radius: 14px;
   font-size: 16px;
+  font-weight: 600;
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #334155;
   cursor: pointer;
+  transition: 0.2s;
 }
+
 .category button:hover {
   background: #38bdf8;
   color: #000;
+}
+
+/* tombol aktif */
+.category button.active {
+  background: #22c55e;
+  color: #000;
+  border-color: #22c55e;
 }
 .container {
   max-width: 900px;
