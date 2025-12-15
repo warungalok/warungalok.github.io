@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Warung Alok</title>
 
 <style>
@@ -13,8 +12,6 @@ body {
   color: #e5e7eb;
   margin: 0;
 }
-
-/* HEADER */
 header {
   background: #020617;
   padding: 20px;
@@ -27,14 +24,16 @@ header h1 {
 header p {
   font-size: 13px;
 }
-
-/* ORDER */
 .order-box {
   background: #020617;
-  margin: 15px;
+  margin: 15px auto;
   padding: 15px;
+  max-width: 900px;
   text-align: center;
   border-radius: 12px;
+}
+.order-box p {
+  margin: 8px 0;
 }
 .order-btn {
   display: inline-block;
@@ -44,56 +43,53 @@ header p {
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
-  margin: 5px;
+  font-size: 16px;
+}
+.order-btn:hover {
+  background: #16a34a;
 }
 
-/* KATEGORI UTAMA */
+.category {
 .category {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   padding: 12px;
+  margin: 10px 0;
   overflow-x: auto;
+  white-space: nowrap;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 .category::-webkit-scrollbar {
   display: none;
 }
+
 .category button {
+  flex: 0 0 auto;
+  min-width: 120px;
   padding: 14px 20px;
   border-radius: 14px;
-  border: 1px solid #334155;
+  font-size: 16px;
+  font-weight: 600;
   background: #020617;
   color: #e5e7eb;
-  font-size: 16px;
+  border: 1px solid #334155;
   cursor: pointer;
-  white-space: nowrap;
+  transition: 0.2s;
 }
+
+.category button:hover {
+  background: #38bdf8;
+  color: #000;
+}
+
+/* tombol aktif */
 .category button.active {
   background: #22c55e;
   color: #000;
+  border-color: #22c55e;
 }
-
-/* SUB KATEGORI */
-.subcategory {
-  display: none;
-  gap: 10px;
-  padding: 10px 12px;
-  overflow-x: auto;
-}
-.subcategory button {
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: 1px solid #334155;
-  background: #020617;
-  color: #e5e7eb;
-  font-size: 14px;
-  cursor: pointer;
-}
-.subcategory button.active {
-  background: #facc15;
-  color: #000;
-}
-
-/* ITEM */
 .container {
   max-width: 900px;
   margin: auto;
@@ -107,16 +103,17 @@ header p {
 }
 .item img {
   width: 100%;
+  object-fit: contain;
   border-radius: 10px;
 }
 .item h2 {
   color: #facc15;
+  margin: 10px 0;
 }
 .price {
   font-size: 18px;
 }
 
-/* FOOTER */
 footer {
   background: #020617;
   text-align: center;
@@ -127,50 +124,15 @@ footer {
 </style>
 
 <script>
-let mainCat = "all";
-let subCat = "all";
-
-function filterMain(cat, btn) {
-  mainCat = cat;
-  subCat = "all";
-
-  document.querySelectorAll(".category button")
-    .forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  document.querySelectorAll(".subcategory")
-    .forEach(s => s.style.display = "none");
-
-  if (cat !== "all") {
-    const sub = document.getElementById("sub-" + cat);
-    if (sub) sub.style.display = "flex";
+function filterCategory(cat) {
+  const items = document.getElementsByClassName("item");
+  for (let i = 0; i < items.length; i++) {
+    if (cat === "all" || items[i].classList.contains(cat)) {
+      items[i].style.display = "block";
+    } else {
+      items[i].style.display = "none";
+    }
   }
-
-  applyFilter();
-}
-
-function filterSub(cat, btn) {
-  subCat = cat;
-  btn.parentElement.querySelectorAll("button")
-    .forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-
-  applyFilter();
-}
-
-function applyFilter() {
-  const items = document.querySelectorAll(".item");
-  items.forEach(item => {
-    let show = true;
-
-    if (mainCat !== "all" && !item.classList.contains(mainCat))
-      show = false;
-
-    if (subCat !== "all" && !item.classList.contains(subCat))
-      show = false;
-
-    item.style.display = show ? "block" : "none";
-  });
 }
 </script>
 </head>
@@ -179,55 +141,82 @@ function applyFilter() {
 
 <header>
   <h1>Warung Alok</h1>
-  <p>Menjual kebutuhan Grow a Garden</p>
+  <hr>
+  <p>Menjual kebutuhan Grow a Garden.</p>
+<p>Proses cepat & aman 100%</p>
+<p>Kalau butuh pet lain yang tidak ada di list, bisa langsung tanya ke admin</p>
+<p>Kalau mau beli, bisa chat admin.</p>
+<p>Beli banyak bisa dapat potongan harga</p>
 </header>
-
+<hr>
+<!-- ORDER WHATSAPP -->
 <div class="order-box">
-  <a class="order-btn" href="https://wa.me/6283170647819" target="_blank">WhatsApp</a>
-  <a class="order-btn" href="https://instagram.com/warung_alok" target="_blank">Instagram</a>
+  <p>Hubungi Admin</p>
+  <a class="order-btn"
+     href="https://wa.me/6283170647819?text=Halo%20Min%20Mau%20Beli"
+     target="_blank">
+     WhatsApp
+  </a>
+  <a class="order-btn"
+     href="https://Instagram.com/warung_alok"
+     target="_blank">
+     Instagram 
+  </a>
 </div>
 
 <!-- KATEGORI -->
 <div class="category">
-  <button class="active" onclick="filterMain('all', this)">Semua</button>
-  <button onclick="filterMain('pet', this)">Pet</button>
-  <button onclick="filterMain('akun', this)">Jasa</button>
-  <button onclick="filterMain('robux', this)">Token</button>
-</div>
-
-<!-- SUB KATEGORI -->
-<div class="subcategory" id="sub-pet">
-  <button class="active" onclick="filterSub('all', this)">Semua Pet</button>
-  <button onclick="filterSub('dino', this)">Dino</button>
-</div>
-
-<div class="subcategory" id="sub-akun">
-  <button class="active" onclick="filterSub('all', this)">Semua Jasa</button>
-  <button onclick="filterSub('joki', this)">Joki</button>
+  <button onclick="filterCategory('all')">Semua</button>
+  <button onclick="filterCategory('pet')">Pet</button>
+  <button onclick="filterCategory('akun')">Jasa Joki</button>
+  <button onclick="filterCategory('robux')">Token</button>
 </div>
 
 <div class="container">
 
-  <div class="item pet dino">
+  <div class="item pet">
     <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
-    <h2>Brontosaurus</h2>
+    <h2>Brontosaurus </h2>
     <p class="price">Rp5.000</p>
   </div>
-
-  <div class="item akun joki">
-    <h2>🎮 Jasa Joki Roblox</h2>
+<div class="item pet">
+    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
+    <h2>Brontosaurus </h2>
+    <p class="price">Rp5.000</p>
+  </div>
+  <div class="item pet">
+    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
+    <h2>Brontosaurus </h2>
+    <p class="price">Rp5.000</p>
+  </div>
+  <div class="item pet">
+    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
+    <h2>Brontosaurus </h2>
+    <p class="price">Rp5.000</p>
+  </div>
+  <div class="item pet">
+    <img src="https://ik.imagekit.io/Skdshop/Brontosaurus%20(1).webp">
+    <h2>Brontosaurus </h2>
+    <p class="price">Rp5.000</p>
+  </div>
+  <div class="item akun">
+    <img src="https://i.imgur.com/IMAGE2.jpg">
+    <h2>🎮 Akun Roblox Sultan</h2>
     <p class="price">Rp350.000</p>
+    <p>Ganti data setelah transaksi</p>
   </div>
 
   <div class="item robux">
-    <h2>💰 Robux Gift</h2>
+    <img src="https://i.imgur.com/IMAGE3.jpg">
+    <h2>💰 Robux Gift 400</h2>
     <p class="price">Rp65.000</p>
+    <p>Proses cepat & aman</p>
   </div>
 
 </div>
 
 <footer>
-  © Warung Alok
+  <p>© Warung Alok </p>
 </footer>
 
 </body>
