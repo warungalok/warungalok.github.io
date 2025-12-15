@@ -93,7 +93,10 @@ header p {
 .container {
   max-width: 900px;
   margin: auto;
-  padding: 20px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 .item {
   background: #020617;
@@ -120,6 +123,11 @@ footer {
   padding: 15px;
   font-size: 14px;
   color: #94a3b8;
+}
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>
 
