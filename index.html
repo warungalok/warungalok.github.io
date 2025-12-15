@@ -50,25 +50,33 @@ header p {
 }
 
 .category {
-  text-align: center;
-  padding: 10px;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 12px 10px;
+  margin: 10px auto;
+  max-width: 100%;
+  scrollbar-width: none; /* Firefox */
+}
+.category::-webkit-scrollbar {
+  display: none; /* Chrome */
 }
 .category button {
+  flex: 0 0 auto;
   background: #020617;
   color: #e5e7eb;
   border: 1px solid #334155;
-  padding: 16px 26px;
-  margin: 8px;
-  border-radius: 12px;
+  padding: 14px 22px;
+  border-radius: 14px;
   cursor: pointer;
-  font-size: clamp(16px, 6vw, 32px);
-  line-height: 1.2;
+  font-size: 16px;
+  white-space: nowrap;
 }
+
 .category button:hover {
   background: #38bdf8;
   color: #000;
 }
-
 .container {
   max-width: 900px;
   margin: auto;
