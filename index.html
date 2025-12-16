@@ -91,6 +91,19 @@ header p {
   background: #facc15;
   color: #000;
 }
+.sort-box {
+  padding: 0 16px 10px;
+}
+
+.sort-box select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  font-size: 15px;
+}
 
 /* GRID ITEM */
 .main-content {
@@ -234,6 +247,14 @@ function applyFilter() {
 
 <div class="subcategory" id="sub-akun">
   <button onclick="filterSub('joki', this)">Koin</button>
+</div>
+  
+<div class="sort-box">
+  <select onchange="sortPrice(this.value)">
+    <option value="">Urutkan Harga</option>
+    <option value="high">Harga Termahal</option>
+    <option value="low">Harga Termurah</option>
+  </select>
 </div>
 
 <div class="main-content">
@@ -407,6 +428,23 @@ window.onload = function () {
   const btnSub = document.querySelector("#sub-pet button");
   if (btnSub) btnSub.click();
 };
+  function sortPrice(type) {
+  const container = document.querySelector(".container");
+  const items = Array.from(container.children);
+
+  items.sort((a, b) => {
+    const priceA = parseInt(
+      a.querySelector(".price").innerText.replace(/[^0-9]/g, "")
+    );
+    const priceB = parseInt(
+      b.querySelector(".price").innerText.replace(/[^0-9]/g, "")
+    );
+
+    return type === "high" ? priceB - priceA : priceA - priceB;
+  });
+
+  items.forEach(item => container.appendChild(item));
+}
 </script>
   
 </body>
