@@ -182,6 +182,32 @@ footer {
   color: #94a3b8;
   padding: 0 12px 6px;
   }
+
+  .subcategory-wrapper {
+  position: relative;
+}
+
+.subcategory-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to left, #0f172a, transparent);
+}
+
+.subcategory-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, #0f172a, transparent);
+}
   
 </style>
 
@@ -250,6 +276,8 @@ function applyFilter() {
   <button onclick="filterMain('mele', this)">Mobile Legend</button>
 </div>
 <div class="scroll-hint">Geser →</div>
+
+<div class="subcategory-wrapper">
 <div class="subcategory" id="sub-pet">
   <button onclick="filterSub('dino', this)">Pet</button>
   <button onclick="filterSub('huge', this)">Pet Huge / Titan</button>
@@ -260,6 +288,7 @@ function applyFilter() {
   <button onclick="filterSub('uang', this)">Sheckless</button>
   <button onclick="filterSub('token', this)">Trade Token</button>
 </div>
+
 
 <div class="subcategory" id="sub-ikan">
   <button onclick="filterSub('koin', this)">Koin</button>
