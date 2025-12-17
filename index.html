@@ -175,6 +175,36 @@ footer {
     0 0 12px rgba(34, 197, 94, 0.35),
     0 0 25px rgba(34, 197, 94, 0.25);
 }
+  
+  .subcategory-grid {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .subcategory-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.subcategory-grid button {
+  padding: 14px 10px;
+  border-radius: 14px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.subcategory-grid button.active {
+  background: #facc15;
+  color: #000;
+}
+  
 </style>
 
 <script>
@@ -242,7 +272,7 @@ function applyFilter() {
   <button onclick="filterMain('mele', this)">Mobile Legend</button>
 </div>
 
-<div class="subcategory" id="sub-pet">
+<div class="subcategory-grid" id="sub-pet">
   <button onclick="filterSub('dino', this)">Pet</button>
   <button onclick="filterSub('huge', this)">Pet Huge / Titan</button>
   <button onclick="filterSub('rbh', this)">Pet Rainbow Hatch</button>
